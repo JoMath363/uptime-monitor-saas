@@ -2,19 +2,19 @@ services:
   frontend:
     build:
       context: ./frontend
-    container_name: supporter-frontend
+    container_name: upwatch-frontend
     ports:
       - "8081:80"
 
   backend:
     build:
       context: ./backend/Api.Solution
-    container_name: supporter-backend
+    container_name: upwatch-backend
     ports:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DatabaseConnectionString=Host=database;Port=5432;Database=supporter_db;Username=admin;Password=Admin12#;TrustServerCertificate=True
+      - ConnectionStrings__DatabaseConnectionString=Host=database;Port=5432;Database=upwatch_db;Username=admin;Password=Admin12#;TrustServerCertificate=True
     depends_on:
       database:
         condition: service_healthy
@@ -22,20 +22,20 @@ services:
   database:
     image: postgres:alpine
     restart: always
-    container_name: supporter-database
+    container_name: upwatch-database
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d supporter_db"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d upwatch_db"]
       interval: 10s
       timeout: 5s
       retries: 5
     environment:
-      POSTGRES_DB: supporter_db
+      POSTGRES_DB: upwatch_db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: Admin12#
     volumes:
-      - supporter_db_data:/var/lib/postgresql/data
+      - upwatch_db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
 volumes:
-  supporter_db_data:
+  upwatch_db_data:
