@@ -2,7 +2,7 @@
 
 namespace Api.Solution.Models.DTOs
 {
-    public class AuthDto
+    public class AuthRequest
     {
         [EmailAddress]
         [Required(ErrorMessage = "{0} is required.")]

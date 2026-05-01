@@ -13,8 +13,8 @@ namespace Api.Solution.Models
         [Required(ErrorMessage = "{0} is required.")]
         public required string PasswordHash { get; set; }
 
-        public Address? Address { get; set; } 
-        public List<Project>? Projects { get; set; }
+        public Address? Address { get; set; }
+        public List<Project> Projects { get; set; } = new();
 
     }
 }

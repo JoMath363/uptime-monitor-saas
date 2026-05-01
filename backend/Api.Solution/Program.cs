@@ -1,4 +1,5 @@
 using Api.Solution.Data;
+using Api.Solution.Middleware;
 using Api.Solution.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -39,12 +40,20 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddAuthorization();
 
-// Services + UnityOfWork
+
+// Services 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<UnityOfWork>();
-builder.Services.AddScoped<UserService>();
+
+builder.Services.AddScoped<CurrentUserService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ProjectService>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 //Configure OpenAPi + Scalar in Dev Enviroment
 if (app.Environment.IsDevelopment())
@@ -54,6 +63,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 
 app.UseAuthentication();
 app.UseAuthorization();

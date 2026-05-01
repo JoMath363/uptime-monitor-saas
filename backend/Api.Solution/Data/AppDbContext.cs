@@ -11,6 +11,13 @@ namespace Api.Solution.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<UpMonitor> UpMonitors { get; set; }
-        
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
     }
 }

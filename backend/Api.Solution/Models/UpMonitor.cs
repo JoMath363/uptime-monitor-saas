@@ -15,10 +15,25 @@ namespace Api.Solution.Models
         public required string Url { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
-        public required string Status { get; set; }
+        public required UpMonitorState State { get; set; }
+
+        [Required(ErrorMessage = "{0} is required.")]
+        public required UpMonitorStatus Status { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
         public required Guid ProjectId { get; set; }
-        public required Project Project { get; set; }
+        public Project Project { get; set; } = null!;
+    }
+
+    public enum UpMonitorState
+    {
+        Active = 1,
+        Paused = 2
+    }
+
+    public enum UpMonitorStatus
+    {
+        Up = 1,
+        Down = 2
     }
 }

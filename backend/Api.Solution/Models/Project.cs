@@ -15,9 +15,9 @@ namespace Api.Solution.Models
         public required string Description { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
-        public required Guid OwnerId { get; set; }
-        public required User Owner { get; set; }
+        public required Guid UserId { get; set; }
+        public User User { get; set; } = null!;
 
-        public List<UpMonitor>? UpMonitors { get; set; }
+        public List<UpMonitor> UpMonitors { get; set; } = new();
     }
 }
