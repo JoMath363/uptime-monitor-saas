@@ -6,42 +6,42 @@ services:
     ports:
       - "8081:80"
 
-  backend:
-    build:
-      context: ./backend/Api.Solution
-    container_name: upwatch-backend
-    ports:
-      - "8080:8080"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
-      # DB
-      - ConnectionStrings__DefaultConnection=Host=database;Port=5432;Database=upwatch_db;Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};TrustServerCertificate=True
-      # JWT
-      - JwtSettings__SecretKey=${JWT_SECRET_KEY}
-      - JwtSettings__Issuer=${JWT_ISSUER}
-      - JwtSettings__Audience=${JWT_AUDIENCE}
-      - JwtSettings__ExpiryMinutes=${JWT_EXPIRY_MINUTES}
-    depends_on:
-      database:
-        condition: service_healthy
+#   backend:
+#     build:
+#       context: ./backend/Api.Solution
+#     container_name: upwatch-backend
+#     ports:
+#       - "8080:8080"
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+#       # DB
+#       - ConnectionStrings__DefaultConnection=Host=database;Port=5432;Database=upwatch_db;Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};TrustServerCertificate=True
+#       # JWT
+#       - JwtSettings__SecretKey=${JWT_SECRET_KEY}
+#       - JwtSettings__Issuer=${JWT_ISSUER}
+#       - JwtSettings__Audience=${JWT_AUDIENCE}
+#       - JwtSettings__ExpiryMinutes=${JWT_EXPIRY_MINUTES}
+#     depends_on:
+#       database:
+#         condition: service_healthy
 
-  database:
-    image: postgres:alpine
-    restart: always
-    container_name: upwatch-database
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d upwatch_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    environment:
-      POSTGRES_DB: upwatch_db
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - db_data:/var/lib/postgresql
-    ports:
-      - "5432:5432"
+#   database:
+#     image: postgres:alpine
+#     restart: always
+#     container_name: upwatch-database
+#     healthcheck:
+#       test: ["CMD-SHELL", "pg_isready -U admin -d upwatch_db"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+#     environment:
+#       POSTGRES_DB: upwatch_db
+#       POSTGRES_USER: ${POSTGRES_USER}
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#     volumes:
+#       - db_data:/var/lib/postgresql
+#     ports:
+#       - "5432:5432"
 
-volumes:
-  db_data:
+# volumes:
+#   db_data:
