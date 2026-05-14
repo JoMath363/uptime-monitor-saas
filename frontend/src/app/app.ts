@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   template: `
-    <router-outlet class="w-full h-full"></router-outlet>
+    <router-outlet class="w-dvh h-dvh"></router-outlet>
   `,
 })
 export class App {

@@ -10,7 +10,7 @@ COPY . .
 #DEVELOPMENT
 FROM base AS Development
 EXPOSE 4200
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--poll=1000"]
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--poll=1000", "--hmr=false"]
 
 #PRODUCTION
 FROM base AS build
