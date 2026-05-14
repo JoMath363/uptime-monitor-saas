@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { DashboardPage } from './pages/dashboard-page/dashboard-page';
+import { ProjectsPage } from './pages/projects-Page/projects-page';
 
 export const routes: Routes = [
-    { path: '', component: DashboardPage}
+    { path: '', component: ProjectsPage}
 ];
